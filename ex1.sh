@@ -1,14 +1,47 @@
 #!/bin/bash
 
+#1. Faça um script onde o usuário informe dois números e apresente opções de operações matemáticas
+#(soma, multiplicação, divisão e subtração). Apresentar um menu de opções (expr, let ou bc)
+
 clear
 
-echo "informe o primeiro número \n"
+read -p "informe o primeiro número " var1
+read -p "informe o segundo número " var2
 
-read var1
+echo "Escolha a operação matemática desejada: soma, multi, div ou subtração"
+read opcao
 
-echo "informe o segundo número \n"
+case $opcao in
+	soma)
+		soma=$(expr $var1 + $var2)
+		printf "Soma = %d: \n" $soma
+		;;
 
-read var2
+	multi)
+		multi=$((var1*var2))
+		echo "multiplicação = $multi"
+		;;
 
-echo "primerio número é $var1"
-echo "e o segundo número é $var2"
+	div)
+		div=`echo "scale=2; $var1/$var2" |bc`
+		echo "divisão: $div"
+		;;
+
+	subtracao)
+		sub=$(expr $var1 - $var2)
+		echo "subtração: $sub"
+		;;
+
+	*)
+		echo "valor invalido"
+		;;
+
+esac
+
+exit
+
+
+
+
+
+
